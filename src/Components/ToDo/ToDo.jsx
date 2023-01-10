@@ -1,6 +1,5 @@
 /** @format */
 import { Slider } from '@mantine/core';
-import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 import List from './List.jsx';
@@ -18,18 +17,7 @@ const ToDo = (props) => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState(0);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
-  const StyledSlider = styled(Slider)`
-    & .mantine-Slider-bar {
-      background-color: blue2;
-    }
-
-    & .mantine-Slider-thumb {
-      border-color: blue2;
-      background-color: white;
-      width: 20px;
-      height: 20px;
-    }
-  `;
+  console.log(incomplete);
 
   function addItem(item) {
     item.id = uuid();
@@ -38,10 +26,10 @@ const ToDo = (props) => {
     setList([...list, item]);
   }
 
-  function deleteItem(id) {
-    const items = list.filter((item) => item.id !== id);
-    setList(items);
-  }
+  // function deleteItem(id) {
+  //   const items = list.filter((item) => item.id !== id);
+  //   setList(items);
+  // }
 
   function toggleComplete(id) {
     const items = list.map((item) => {
