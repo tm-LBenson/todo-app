@@ -24,14 +24,13 @@ export default function List({ list, toggleComplete }) {
           >
             <Card.Section
               inheritPadding
-                
               withBorder
               className="card__top"
             >
               <Group position="apart">
-                
                 <div className="card__top--left">
                   <Button
+                    onClick={() => toggleComplete(item.id)}
                     radius={'xl'}
                     compact
                     color="green"
@@ -40,7 +39,6 @@ export default function List({ list, toggleComplete }) {
                   </Button>
                   <p>{item.assignee || name}</p>
                 </div>
-                <div onClick={() => toggleComplete(item.id)}></div>
                 <CloseButton
                   position="top-end"
                   className="card__top--close"
