@@ -37,6 +37,7 @@ To run the application locally:
 
 ### Application
 
+![image](https://user-images.githubusercontent.com/105423307/211463663-9457b20c-c896-436e-89e5-941af3ef32f2.png)
 
 
 ### Testing
