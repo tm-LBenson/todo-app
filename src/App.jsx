@@ -14,9 +14,11 @@ export default function App() {
       withNormalizeCSS
     >
       <Header incomplete={incomplete} />
-      
-        <ToDo setIncomplete={setIncomplete} />
-      
+
+      <ToDo
+        incomplete={incomplete}
+        setIncomplete={setIncomplete}
+      />
     </MantineProvider>
   );
 }

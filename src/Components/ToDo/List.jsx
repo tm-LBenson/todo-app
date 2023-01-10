@@ -4,14 +4,18 @@ import React, { useContext, useState } from 'react';
 import { SettingsContext } from '../SettingsContext';
 
 export default function List({ list, toggleComplete }) {
-  const { itemsDisplayed, name } = useContext(SettingsContext);
+  const { itemsDisplayed, name, showCompleted } = useContext(SettingsContext);
   const [page, onChange] = useState(1);
   const startIndex = (page - 1) * itemsDisplayed;
   const endIndex = startIndex + itemsDisplayed;
   const pageList = list?.slice(startIndex, endIndex);
+  const filtered = pageList.filter((todo) => !todo.complete);
+  const filteredAll = list.filter((todo) => !todo.complete);
+  const displayed = showCompleted ? pageList : filtered;
+  const perPage = showCompleted ? list?.length : filteredAll.length;
   return (
     <div className="list__content">
-      {pageList?.map((item, idx) => (
+      {displayed?.map((item, idx) => (
         <div
           data-testid={`todo-item-${idx}`}
           key={item.id}
@@ -30,7 +34,10 @@ export default function List({ list, toggleComplete }) {
               <Group position="apart">
                 <div className="card__top--left">
                   <Button
-                    onClick={() => toggleComplete(item.id)}
+                    onClick={() => {
+                      
+                      toggleComplete(item.id)
+                    }}
                     radius={'xl'}
                     compact
                     color="green"
@@ -59,13 +66,13 @@ export default function List({ list, toggleComplete }) {
           </Card>
         </div>
       ))}
-
+      {console.log(perPage)}
       <Pagination
         data-testid="pagination"
         page={page}
         initialPage={1}
         onChange={onChange}
-        total={Math.ceil(list?.length / itemsDisplayed)}
+        total={Math.ceil(perPage / itemsDisplayed)}
       />
     </div>
   );

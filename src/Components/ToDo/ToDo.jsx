@@ -9,20 +9,18 @@ import { Button } from '@mantine/core';
 import { v4 as uuid } from 'uuid';
 import { SettingsContext } from '../SettingsContext.jsx';
 
-const ToDo = (props) => {
+const ToDo = ({ setIncomplete, incomplete }) => {
   const { difficulty } = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: difficulty,
   });
   const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState(0);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
-  console.log(incomplete);
 
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
-    console.log(item);
+
     setList([...list, item]);
   }
 
@@ -45,17 +43,15 @@ const ToDo = (props) => {
   useEffect(() => {
     setIncomplete(() => {
       let incompleteCount = list.filter((item) => !item.complete).length;
-      props.setIncomplete(incompleteCount);
       document.title = `To Do List: ${incompleteCount}`;
-      props.setIncomplete(incompleteCount);
       return incompleteCount;
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
 
-  console.log(difficulty);
   return (
-    <main className='wrapper'>
+    <main className="wrapper">
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -106,6 +102,7 @@ const ToDo = (props) => {
       </form>
 
       <List
+        incomplete={incomplete}
         className="list"
         list={list ? list : []}
         toggleComplete={toggleComplete}
