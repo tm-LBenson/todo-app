@@ -39,6 +39,10 @@ To run the application locally:
 
 ### Application
 
+The `useForm` hook is a custom hook that you can use to manage form state and handle form submissions in a React app. It takes two arguments: a callback function that will be called when the form is submitted, and an optional object containing default values for the form fields.
+
+The hook returns an object with three properties: handleSubmit, handleChange, and values. The handleSubmit function is called when the form is submitted and prevents the default refresh behavior. It calls the callback function passed to the hook, passing in the current form values as an argument. The handleChange function is called when a form field value is changed, and updates the form values in the hook's state. The values property is an object containing the current form values.
+
 ![image](https://user-images.githubusercontent.com/105423307/211463663-9457b20c-c896-436e-89e5-941af3ef32f2.png)
 
 ### Testing
