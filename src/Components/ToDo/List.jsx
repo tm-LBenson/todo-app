@@ -22,31 +22,42 @@ export default function List({ list, toggleComplete }) {
             radius="md"
             withBorder
           >
-            <Group position="center"></Group>
-            <Card.Section className="card__top">
-              <div className="card__top--left">
-                <Button
-                  radius={'xl'}
-                  compact
-                  color="green"
-                >
-                  {item?.complete ? 'Complete' : 'Pending'}
-                </Button>
-                <p>{item.text}</p>
-              <p>{item.assignee || name}</p>
-              </div>
-              <div onClick={() => toggleComplete(item.id)}></div>
-              <CloseButton
-                className="card__top--close"
-                title="Close popover"
-                size="xl"
-                iconSize={20}
-              />
+            <Card.Section
+              inheritPadding
+                
+              withBorder
+              className="card__top"
+            >
+              <Group position="apart">
+                
+                <div className="card__top--left">
+                  <Button
+                    radius={'xl'}
+                    compact
+                    color="green"
+                  >
+                    {item?.complete ? 'Complete' : 'Pending'}
+                  </Button>
+                  <p>{item.assignee || name}</p>
+                </div>
+                <div onClick={() => toggleComplete(item.id)}></div>
+                <CloseButton
+                  position="top-end"
+                  className="card__top--close"
+                  title="Close popover"
+                  size="xl"
+                  iconSize={20}
+                />
+              </Group>
             </Card.Section>
-
-            <p>
-              <small>Difficulty: {item.difficulty}</small>
-            </p>
+            <div className="card__bottom">
+              <p>{item.text}</p>
+              <div className="card__bottom--difficulty">
+                <p>
+                  <small>Difficulty: {item.difficulty}</small>
+                </p>
+              </div>
+            </div>
           </Card>
         </div>
       ))}

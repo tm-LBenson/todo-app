@@ -1,12 +1,20 @@
 /** @format */
 
 .card__top {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 1rem;
-  border-bottom: 1px, lightgray solid;
+  
   &--left {
     display: flex;
     gap: 1rem;
+  }
+}
+
+.card__bottom {
+  margin-top: 1rem;
+  width: 100%;
+
+  &--difficulty {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 }
