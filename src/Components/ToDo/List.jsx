@@ -9,10 +9,10 @@ export default function List({ list, toggleComplete }) {
   const startIndex = (page - 1) * itemsDisplayed;
   const endIndex = startIndex + itemsDisplayed;
   const pageList = list?.slice(startIndex, endIndex);
-  const filtered = pageList.filter((todo) => !todo.complete);
-  const filteredAll = list.filter((todo) => !todo.complete);
+  const filtered = pageList?.filter((todo) => !todo.complete);
+  const filteredAll = list?.filter((todo) => !todo.complete);
   const displayed = showCompleted ? pageList : filtered;
-  const perPage = showCompleted ? list?.length : filteredAll.length;
+  const perPage = showCompleted ? list?.length : filteredAll?.length;
   return (
     <div className="list__content">
       {displayed?.map((item, idx) => (
