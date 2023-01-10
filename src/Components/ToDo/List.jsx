@@ -16,6 +16,7 @@ export default function List({ list, setList, toggleComplete }) {
   const pageList = list?.slice(startIndex, endIndex);
   const filtered = pageList?.filter((todo) => !todo.complete);
   const filteredAll = list?.filter((todo) => !todo.complete);
+  
   const displayed = showCompleted ? pageList : filtered;
   const perPage = showCompleted ? list?.length : filteredAll?.length;
   return (

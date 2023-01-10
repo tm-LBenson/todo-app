@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 import { SettingsContext } from '../SettingsContext.jsx';
 
 const ToDo = ({ setIncomplete, incomplete }) => {
-  const { difficulty } = useContext(SettingsContext);
+  const { difficulty, showCompleted } = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: difficulty,
   });
@@ -31,8 +31,13 @@ const ToDo = ({ setIncomplete, incomplete }) => {
       }
       return item;
     });
-
-    setList(items);
+    if (showCompleted) {
+      setList(items);
+      return;
+    } else {
+      const filtered = list.filter((item) => !item.complete);
+      setList(filtered);
+    }
   }
 
   useEffect(() => {
