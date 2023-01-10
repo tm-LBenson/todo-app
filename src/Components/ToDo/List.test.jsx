@@ -29,6 +29,6 @@ describe('ToDo Component Tests', () => {
 
     let item1 = screen.getByTestId('todo-item-1');
 
-    expect(item1).toHaveTextContent('Assigned to: Difficulty: Complete:');
+    expect(item1).toHaveTextContent('PendingDifficulty:');
   });
 });

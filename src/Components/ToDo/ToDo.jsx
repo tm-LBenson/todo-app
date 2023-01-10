@@ -55,7 +55,7 @@ const ToDo = (props) => {
 
   console.log(difficulty);
   return (
-    <>
+    <main className='wrapper'>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
@@ -96,6 +96,7 @@ const ToDo = (props) => {
 
         <label>
           <Button
+            className="button"
             radius={'sm'}
             type="submit"
           >
@@ -105,10 +106,11 @@ const ToDo = (props) => {
       </form>
 
       <List
+        className="list"
         list={list ? list : []}
         toggleComplete={toggleComplete}
       />
-    </>
+    </main>
   );
 };
 

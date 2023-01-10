@@ -1,0 +1,12 @@
+/** @format */
+
+.card__top {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+  border-bottom: 1px, lightgray solid;
+  &--left {
+    display: flex;
+    gap: 1rem;
+  }
+}

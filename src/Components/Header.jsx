@@ -3,7 +3,10 @@
 export default function Header({ incomplete }) {
   return (
     <>
-      <header data-testid="todo-header">
+      <header
+        className="header"
+        data-testid="todo-header"
+      >
         <nav>
           <ul>
             <li>Home</li>

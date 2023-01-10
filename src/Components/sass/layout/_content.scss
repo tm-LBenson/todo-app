@@ -1,0 +1,17 @@
+/** @format */
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  gap: 3rem;
+  .list {
+    display: flex;
+    flex-direction: column;
+    &__content{
+      width: 60%;
+    }
+  }
+}

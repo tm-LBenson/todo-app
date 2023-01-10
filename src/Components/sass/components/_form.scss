@@ -1,0 +1,17 @@
+/** @format */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid rgb(155, 148, 148);
+  width: 30%;
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+  .button {
+    width: 12rem;
+    margin: 1rem;
+  }
+}
