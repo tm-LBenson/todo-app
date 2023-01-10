@@ -3,7 +3,12 @@ import { Pagination, Card, CloseButton, Group, Button } from '@mantine/core';
 import React, { useContext, useState } from 'react';
 import { SettingsContext } from '../SettingsContext';
 
-export default function List({ list, toggleComplete }) {
+export default function List({ list, setList, toggleComplete }) {
+  function deleteItem(id) {
+    const items = list.filter((item) => item.id !== id);
+    setList(items);
+  }
+
   const { itemsDisplayed, name, showCompleted } = useContext(SettingsContext);
   const [page, onChange] = useState(1);
   const startIndex = (page - 1) * itemsDisplayed;
@@ -35,8 +40,7 @@ export default function List({ list, toggleComplete }) {
                 <div className="card__top--left">
                   <Button
                     onClick={() => {
-                      
-                      toggleComplete(item.id)
+                      toggleComplete(item.id);
                     }}
                     radius={'xl'}
                     compact
@@ -52,6 +56,7 @@ export default function List({ list, toggleComplete }) {
                   title="Close popover"
                   size="xl"
                   iconSize={20}
+                  onClick={() => deleteItem(item.id)}
                 />
               </Group>
             </Card.Section>

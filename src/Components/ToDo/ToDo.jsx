@@ -24,11 +24,6 @@ const ToDo = ({ setIncomplete, incomplete }) => {
     setList([...list, item]);
   }
 
-  // function deleteItem(id) {
-  //   const items = list.filter((item) => item.id !== id);
-  //   setList(items);
-  // }
-
   function toggleComplete(id) {
     const items = list.map((item) => {
       if (item.id === id) {
@@ -103,6 +98,7 @@ const ToDo = ({ setIncomplete, incomplete }) => {
 
       <List
         incomplete={incomplete}
+        setList={setList}
         className="list"
         list={list ? list : []}
         toggleComplete={toggleComplete}
