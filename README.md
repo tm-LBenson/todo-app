@@ -4,6 +4,8 @@
 
 ## Project: todo-app
 
+[Link to Netlify](https://splendorous-biscotti-5db19c.netlify.app/)
+
 ## Problem Domain
 
 Implement the React Context API to define global settings that can be accessed by multiple components. Create a context provider that manages application display settings, and provide it at the application level. Add default values to the context provider's state, including the number of items to display, a boolean to hide completed items, and a default sort word. Consume and use the context values throughout the components, including the <List /> component, which now shows a maximum of three items per screen by default and uses the Mantine Pagination component to allow users to navigate a list of items. Also add the ability to hide completed items in the list by default.
@@ -38,7 +40,6 @@ To run the application locally:
 ### Application
 
 ![image](https://user-images.githubusercontent.com/105423307/211463663-9457b20c-c896-436e-89e5-941af3ef32f2.png)
-
 
 ### Testing
 
