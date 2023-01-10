@@ -1,5 +1,7 @@
 /** @format */
 
+import { Link } from 'react-router-dom';
+
 export default function Header({ incomplete }) {
   return (
     <>
@@ -9,7 +11,12 @@ export default function Header({ incomplete }) {
       >
         <nav>
           <ul>
-            <li>Home</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="settings">Settings</Link>
+            </li>
           </ul>
         </nav>
 
