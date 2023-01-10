@@ -3,20 +3,20 @@ import { Slider } from '@mantine/core';
 import styled from '@emotion/styled';
 import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
+import List from './List.jsx';
 
 import { Button } from '@mantine/core';
 
 import { v4 as uuid } from 'uuid';
-import TodoItems from './TodoItems.jsx';
 import { SettingsContext } from '../SettingsContext.jsx';
 
-const ToDo = () => {
-  const { name, difficulty } = useContext(SettingsContext);
+const ToDo = (props) => {
+  const { difficulty } = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: difficulty,
   });
   const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState([]);
+  const [incomplete, setIncomplete] = useState(0);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
   const StyledSlider = styled(Slider)`
     & .mantine-Slider-bar {
@@ -55,18 +55,24 @@ const ToDo = () => {
   }
 
   useEffect(() => {
-    let incompleteCount = list.filter((item) => !item.complete).length;
-    setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
-    // linter will want 'incomplete' added to dependency array unnecessarily.
-    // disable code used to avoid linter warning
+    setIncomplete(() => {
+      let incompleteCount = list.filter((item) => !item.complete).length;
+      props.setIncomplete(incompleteCount);
+      document.title = `To Do List: ${incompleteCount}`;
+      props.setIncomplete(incompleteCount);
+      return incompleteCount;
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
 
   console.log(difficulty);
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
         <h2>Add To Do Item</h2>
 
         <label>
@@ -110,7 +116,7 @@ const ToDo = () => {
         </label>
       </form>
 
-      <TodoItems
+      <List
         list={list ? list : []}
         toggleComplete={toggleComplete}
       />
