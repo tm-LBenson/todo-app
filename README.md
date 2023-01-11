@@ -6,6 +6,7 @@
 
 [Link to Netlify](https://splendorous-biscotti-5db19c.netlify.app/)
 
+
 ## Problem Domain
 
 Extend the existing context provider by adding new features such as application settings management, saving user preferences to local storage, reading from local storage on application load, and utilizing context values in different components to show/hide completed items, limit number of items per screen and navigate through a long list of items using pagination component. State should be stringified before saving to local storage and parsed when retrieved.
