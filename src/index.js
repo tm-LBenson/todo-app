@@ -10,10 +10,10 @@ import SettingsProvider from './Components/SettingsContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SettingsProvider>
       <BrowserRouter>
+    <SettingsProvider>
         <App />
-      </BrowserRouter>
     </SettingsProvider>
+      </BrowserRouter>
   </React.StrictMode>,
 );

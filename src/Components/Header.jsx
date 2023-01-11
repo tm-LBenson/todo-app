@@ -1,5 +1,6 @@
 /** @format */
 
+import { Button } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 export default function Header({ incomplete }) {
@@ -9,18 +10,23 @@ export default function Header({ incomplete }) {
         className="header"
         data-testid="todo-header"
       >
-        <nav>
-          <ul>
+        <nav className="navbar">
+          <ul className="navbar__links">
+            <div className="navbar__links--left">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/settings">Settings</Link>
+              </li>
+            </div>
             <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="settings">Settings</Link>
+              <Link to="/">
+                <Button color={'red'}>Log Out</Button>
+              </Link>
             </li>
           </ul>
         </nav>
-
-        <h1 data-testid="todo-h1">To Do List: {incomplete} items pending</h1>
       </header>
     </>
   );

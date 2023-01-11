@@ -1,5 +1,5 @@
 /** @format */
-import { Slider } from '@mantine/core';
+import { Card, Slider } from '@mantine/core';
 import React, { useContext, useEffect, useState } from 'react';
 import useForm from '../../hooks/form.js';
 import List from './List.jsx';
@@ -10,9 +10,9 @@ import { v4 as uuid } from 'uuid';
 import { SettingsContext } from '../SettingsContext.jsx';
 
 const ToDo = ({ setIncomplete, incomplete }) => {
-  const { difficulty, showCompleted } = useContext(SettingsContext);
+  const { sliderSetting, showCompleted } = useContext(SettingsContext);
   const [defaultValues] = useState({
-    difficulty: difficulty,
+    difficulty: sliderSetting,
   });
   const [list, setList] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
@@ -51,56 +51,63 @@ const ToDo = ({ setIncomplete, incomplete }) => {
   }, [list]);
 
   return (
-    <main className="wrapper">
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
+    <main className="todo">
+      <Card
+        className="todo__form"
+        shadow="sm"
+        p="lg"
+        radius="md"
+        withBorder
       >
-        <h2>Add To Do Item</h2>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <h2>Add To Do Item</h2>
 
-        <label>
-          <span>To Do Item</span>
-          <input
-            onChange={handleChange}
-            name="text"
-            type="text"
-            placeholder="Item Details"
-          />
-        </label>
+          <label>
+            <span>To Do Item</span>
+            <input
+              onChange={handleChange}
+              name="text"
+              type="text"
+              placeholder="Item Details"
+            />
+          </label>
 
-        <label>
-          <span>Assigned To</span>
-          <input
-            onChange={handleChange}
-            name="assignee"
-            type="text"
-            placeholder="Assignee Name"
-          />
-        </label>
+          <label>
+            <span>Assigned To</span>
+            <input
+              onChange={handleChange}
+              name="assignee"
+              type="text"
+              placeholder="Assignee Name"
+            />
+          </label>
 
-        <label>
-          <span>Difficulty</span>
+          <label>
+            <span>Difficulty</span>
 
-          <Slider
-            defaultValue={defaultValues.difficulty}
-            min={1}
-            max={5}
-            onChange={(e) => handleChange(e)}
-          />
-        </label>
+            <Slider
+              defaultValue={defaultValues.difficulty}
+              min={1}
+              max={5}
+              onChange={(e) => handleChange(e)}
+            />
+          </label>
 
-        <label>
-          <Button
-            className="button"
-            radius={'sm'}
-            type="submit"
-          >
-            Add Item
-          </Button>
-        </label>
-      </form>
-
+          <label>
+            <Button
+              className="button"
+              radius={'sm'}
+              type="submit"
+            >
+              Add Item
+            </Button>
+          </label>
+        </form>
+      </Card>
       <List
         incomplete={incomplete}
         setList={setList}
