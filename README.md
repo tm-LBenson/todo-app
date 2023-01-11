@@ -1,6 +1,24 @@
 <!-- @format -->
 
-# Lab-31-d49
+# Lab-32-d49
+
+## Project: todo-app
+
+[Link to Netlify](https://splendorous-biscotti-5db19c.netlify.app/)
+
+## Problem Domain
+
+Extend the existing context provider by adding new features such as application settings management, saving user preferences to local storage, reading from local storage on application load, and utilizing context values in different components to show/hide completed items, limit number of items per screen and navigate through a long list of items using pagination component. State should be stringified before saving to local storage and parsed when retrieved.
+
+## Feature 1 Application Setup
+
+- [x] Create a context for managing application settings and provide it at the application level.
+- [x] Create a function in the context that saves user preferences to local storage.
+- [x] Implement a useEffect() in the context to read from local storage and set the values for state properties on application load
+- [x] Utilize the context values in different components
+- [x] Implement unit testing
+
+## Lab-31-d49
 
 ## Project: todo-app
 
