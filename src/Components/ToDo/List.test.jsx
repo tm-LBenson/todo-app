@@ -2,6 +2,7 @@
 
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { SettingsContext } from '../SettingsContext';
 import List from './List';
@@ -18,12 +19,14 @@ describe('ToDo Component Tests', () => {
     let list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     render(
       <>
-        <SettingsContext.Provider value={{ itemsDisplayed: 3 }}>
-          <List
-            list={list}
-            itemsDisplayed={3}
-          />
-        </SettingsContext.Provider>
+        <BrowserRouter>
+          <SettingsContext.Provider value={{ itemsDisplayed: 3 }}>
+            <List
+              list={list}
+              itemsDisplayed={3}
+            />
+          </SettingsContext.Provider>
+        </BrowserRouter>
       </>,
     );
 
