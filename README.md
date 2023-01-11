@@ -4,8 +4,7 @@
 
 ## Project: todo-app
 
-[Link to Netlify](https://splendorous-biscotti-5db19c.netlify.app/)
-
+[Link to Netlify](https://coruscating-dodol-e735f1.netlify.app)
 
 ## Problem Domain
 
@@ -20,7 +19,6 @@ Extend the existing context provider by adding new features such as application 
 - [x] Implement unit testing
 
 ![image](https://user-images.githubusercontent.com/105423307/211718500-a4aae9e3-3cf3-4ac0-95e2-c0832a404458.png)
-
 
 ## Lab-31-d49
 
