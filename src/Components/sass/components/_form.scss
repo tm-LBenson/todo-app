@@ -1,0 +1,35 @@
+/** @format */
+
+.todo {
+  &__form {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 30rem;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 30%;
+    min-width: 30rem;
+    label {
+      display: flex;
+      flex-direction: column;
+    }
+    .button {
+      width: 12rem;
+      margin: 1rem;
+    }
+  }
+}
+
+.login-form {
+  display: flex;
+  gap: 1rem;
+  width: 50rem;
+  input {
+    width: 20rem;
+    &[type='password'] {
+      width: 20rem;
+     
+    }
+  }
+}

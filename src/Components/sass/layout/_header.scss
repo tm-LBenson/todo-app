@@ -1,0 +1,24 @@
+/** @format */
+
+.header {
+  .navbar {
+    &__links {
+      display: flex;
+      align-items: center;
+      padding-left: 10rem;
+      width: 100%;
+      background-color: $color-header-nav;
+      height: 6rem;
+      justify-content: space-between;
+      padding-right: 2rem;
+      &--left {
+        li a {
+          color: $color-header-nav-text;
+       
+        }
+        display: flex;
+        gap: 1rem;
+      }
+    }
+  }
+}
