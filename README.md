@@ -1,6 +1,52 @@
 <!-- @format -->
 
-# Lab-32-d49
+## Lab-33-d49
+
+## Project: todo-app
+
+## Problem Domain
+
+Implement an Authentication/Authorization React Context to protect the To Do application by restricting access to various application features based on the user's login status and capabilities.
+
+## Feature 1 Login/Auth Context
+
+- [x] Define a function that can simulate a login event.
+- [x] Parameters: username and password as strings.
+- [x] Sets a User on the auth context, and changes login status to true.
+- [x] Define a function that can simulate a logout event.
+- [x] Resets the User object and changes login status to false.
+- [x] Define a function that can authorize a User based on a capability.
+- [x] Parameters: a capability as a string.
+- [x] Returns a boolean whether the user has the capability parameter.
+
+## Feature 2 <Auth /> Component
+
+- [x] Given a capability prop of type string, conditionally render components based on the user stored in context.
+- [x] Hide the entire interface until the user has logged in.
+- [x] Implement the following RBAC rules:
+- [x] Logged In Users with 'update' permissions can click the records to mark them as complete.
+- [x] Logged In Users with 'create' permissions can create new items.
+- [x] Logged In Users with 'delete' permissions can delete items.
+- [x] Logged In Users with 'read' permissions can see the list of To Do Items.
+
+## Feature 3 <Login /> Component
+
+- [x] Accepts Username and Password.
+- [x] On successful login, store the token as a cookie.
+- [x] If a user returns and has a valid login cookie, hide the login form and consider them "Logged In".
+- [x] Display a logout button instead of a form if they are "Logged In".
+
+## Feature 4 Convert to Function Components
+
+- [x] Convert the Auth/Context.js Context Provider to be a function, rather than a class.
+- [x] Convert the <Login /> and <Auth /> components to be implemented as 'function' components instead of 'class' components.
+
+## Feature 5 Incorporate into To Do Application
+
+- [x] Extract the Login Context and relevant components from the provided sample application and incorporate them into the To Do application.
+- [x] Implement Authentication and Authorization as described in the requirements above.
+
+## Lab-32-d49
 
 ## Project: todo-app
 
