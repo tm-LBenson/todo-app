@@ -1,7 +1,7 @@
 <!-- @format -->
 
 ## Lab-33-d49
-
+[live deployment](https://startling-alpaca-250bea.netlify.app/)
 ## Project: todo-app
 ![image](https://user-images.githubusercontent.com/105423307/211973543-70527371-a99c-426c-a65c-617e8252caea.png)
 
@@ -31,7 +31,12 @@ Implement an Authentication/Authorization React Context to protect the To Do app
 - [x] Logged In Users with 'read' permissions can see the list of To Do Items.
 
 ## Feature 3 <Login /> Component
-
+  Available users for login:
+  (username/password)
+  - user/USER
+  - editor/EDITOR
+  - writer/WRITER
+  - admin/ADMIN
 - [x] Accepts Username and Password.
 - [x] On successful login, store the token as a cookie.
 - [x] If a user returns and has a valid login cookie, hide the login form and consider them "Logged In".
