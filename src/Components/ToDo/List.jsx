@@ -2,7 +2,7 @@
 import { Pagination, Card, CloseButton, Group, Button } from '@mantine/core';
 import React, { useContext, useState } from 'react';
 import { When } from 'react-if';
-import Auth from '../auth/auth';
+
 import { LoginContext } from '../auth/context';
 import { SettingsContext } from '../SettingsContext';
 
