@@ -1,7 +1,8 @@
 /** @format */
 import { Pagination, Card, CloseButton, Group, Button } from '@mantine/core';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { When } from 'react-if';
+import fetchApi from '../../utility/fetchApi';
 
 import { LoginContext } from '../auth/context';
 import { SettingsContext } from '../SettingsContext';
@@ -9,9 +10,47 @@ import { SettingsContext } from '../SettingsContext';
 export default function List({ list, setList, toggleComplete }) {
   const { user } = useContext(LoginContext);
 
-  function deleteItem(id) {
-    const items = list.filter((item) => item.id !== id);
-    setList(items);
+  useEffect(() => {
+    async function getTodos() {
+      try {
+        const response = await fetchApi(
+          'https://api-js401.herokuapp.com/api/v1/todo',
+          null,
+          'GET',
+        );
+        setList(response.results);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getTodos();
+  }, []);
+
+  async function updateItem(id, data) {
+    try {
+      const response = await fetchApi(
+        `https://api-js401.herokuapp.com/api/v1/todo/${id}`,
+        data,
+        'PUT',
+      );
+      console.log(response);
+      setList(response.results);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function deleteItem(id) {
+    try {
+      const response = await fetchApi(
+        `https://api-js401.herokuapp.com/api/v1/todo/${id}`,
+        null,
+        'DELETE',
+      );
+      setList(response.results);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   const { itemsDisplayed, name, showCompleted } = useContext(SettingsContext);
@@ -29,8 +68,9 @@ export default function List({ list, setList, toggleComplete }) {
       {displayed?.map((item, idx) => (
         <div
           data-testid={`todo-item-${idx}`}
-          key={item.id}
+          key={item._id}
         >
+          {console.log(item._id)}
           <Card
             shadow="sm"
             p="lg"
@@ -47,8 +87,8 @@ export default function List({ list, setList, toggleComplete }) {
                   <When condition={item?.complete}>
                     <Button
                       onClick={() => {
-                        user.capabilities.includes('create') &&
-                          toggleComplete(item.id);
+                        user.acl.capabilities.includes('update') &&
+                          updateItem(item._id, { complete: false });
                       }}
                       radius={'xl'}
                       compact
@@ -60,8 +100,8 @@ export default function List({ list, setList, toggleComplete }) {
                   <When condition={!item?.complete}>
                     <Button
                       onClick={() => {
-                        user.capabilities.includes('create') &&
-                          toggleComplete(item.id);
+                        user.acl.capabilities.includes('update') &&
+                          updateItem(item._id, { complete: true });
                       }}
                       radius={'xl'}
                       compact
@@ -81,7 +121,8 @@ export default function List({ list, setList, toggleComplete }) {
                   size="xl"
                   iconSize={20}
                   onClick={() => {
-                    user.capabilities.includes('delete') && deleteItem(item.id);
+                    user.acl.capabilities.includes('delete') &&
+                      deleteItem(item._id);
                   }}
                 />
               </Group>
@@ -97,7 +138,6 @@ export default function List({ list, setList, toggleComplete }) {
           </Card>
         </div>
       ))}
-      {console.log(perPage)}
       <Pagination
         data-testid="pagination"
         page={page}

@@ -4,6 +4,7 @@ import { Button, TextInput } from '@mantine/core';
 import React, { useState, useContext } from 'react';
 import { When } from 'react-if';
 import { Link } from 'react-router-dom';
+
 import { LoginContext } from './context.jsx';
 
 const Login = () => {
@@ -17,8 +18,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(state.username, state.password);
-  
   };
+
+
 
   return (
     <>
@@ -49,7 +51,7 @@ const Login = () => {
             onChange={handleChange}
           />
           <Button
-            color={'green'}
+            color={'dark'}
             type="submit"
           >
             Login
