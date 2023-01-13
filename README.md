@@ -2,7 +2,7 @@
 
 # Lab-34-d49
 
-[live deployment](https://startling-alpaca-250bea.netlify.app/)
+[live deployment](https://shimmering-stroopwafel-08e6c3.netlify.app/)
 
 ## Project: todo-app
 
