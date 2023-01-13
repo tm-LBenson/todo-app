@@ -5,9 +5,8 @@ import useForm from '../../hooks/form.js';
 import List from './List.jsx';
 
 import { Button } from '@mantine/core';
-
-import { v4 as uuid } from 'uuid';
 import { SettingsContext } from '../SettingsContext.jsx';
+import fetchApi from '../../utility/fetchApi.js';
 
 const ToDo = ({ setIncomplete, incomplete }) => {
   const { sliderSetting, showCompleted } = useContext(SettingsContext);
@@ -17,11 +16,17 @@ const ToDo = ({ setIncomplete, incomplete }) => {
   const [list, setList] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
 
-  function addItem(item) {
-    item.id = uuid();
-    item.complete = false;
-
-    setList([...list, item]);
+  async function addItem(item) {
+    try {
+      const response = await fetchApi(
+        'https://api-js401.herokuapp.com/api/v1/todo',
+        item,
+        'POST',
+      );
+      setList(response.results);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function toggleComplete(id) {
@@ -42,7 +47,7 @@ const ToDo = ({ setIncomplete, incomplete }) => {
 
   useEffect(() => {
     setIncomplete(() => {
-      let incompleteCount = list.filter((item) => !item.complete).length;
+      let incompleteCount = list?.filter((item) => !item.complete).length;
       document.title = `To Do List: ${incompleteCount}`;
       return incompleteCount;
     });

@@ -3,33 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import cookie from 'react-cookies';
 import jwt_decode from 'jwt-decode';
-
-const testUsers = {
-  Administrator: {
-    password: 'ADMIN',
-    name: 'admin',
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRtaW5pc3RyYXRvciIsInJvbGUiOiJhZG1pbiIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJywncmVhZCcsJ3VwZGF0ZScsJ2RlbGV0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.pAZXAlTmC8fPELk2xHEaP1mUhR8egg9TH5rCyqZhZkQ',
-  },
-  Editor: {
-    password: 'EDITOR',
-    name: 'editor',
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWRpdG9yIiwicm9sZSI6ImVkaXRvciIsImNhcGFiaWxpdGllcyI6IlsncmVhZCcsJ3VwZGF0ZSddIiwiaWF0IjoxNTE2MjM5MDIyfQ.3aDn3e2pf_J_1rZig8wj9RiT47Ae2Lw-AM-Nw4Tmy_s',
-  },
-  Writer: {
-    password: 'WRITER',
-    name: 'writer',
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiV3JpdGVyIiwicm9sZSI6IndyaXRlciIsImNhcGFiaWxpdGllcyI6IlsnY3JlYXRlJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.dmKh8m18mgQCCJp2xoh73HSOWprdwID32hZsXogLZ68',
-  },
-  User: {
-    password: 'USER',
-    name: 'user',
-    token:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXNlciIsInJvbGUiOiJ1c2VyIiwiY2FwYWJpbGl0aWVzIjoiWydyZWFkJ10iLCJpYXQiOjE1MTYyMzkwMjJ9.WXYvIKLdPz_Mm0XDYSOJo298ftuBqqjTzbRvCpxa9Go',
-  },
-};
+import fetchApi from '../../utility/fetchApi';
 
 export const LoginContext = React.createContext();
 
@@ -38,73 +12,66 @@ const LoginProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
-  function can(capability) {
+  false && console.log(token);
+  const can = (capability) => {
     console.log(user);
-    return user?.capabilities?.includes(capability);
-  }
+    return user?.acl?.capabilities?.includes(capability);
+  };
 
-  const login = async (role, password) => {
-    console.log('logging in', role);
-    let auth = Object.values(testUsers).find((user) => user.name === role);
-    if (!auth) {
-      setError('Role not found');
-      return;
-    }
-
-    if (auth.password !== password) {
-      setError('Incorrect password');
-      return;
-    }
-
+  const login = async (username, password) => {
     try {
-      validateToken(auth.token);
-    } catch (e) {
-      setError(e);
-      console.error(e);
+      const data = await fetchApi(
+        'https://api-js401.herokuapp.com/signin',
+        null,
+        'POST',
+        { username, password },
+      );
+
+      console.log(data);
+      if (data.token) {
+        setToken(data.token);
+        setLoggedIn(true);
+        setUser(data.user);
+        setError(null);
+        cookie.save('token', data.token, { path: '/' });
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
     }
   };
 
   const logout = () => {
     setLoggedIn(false);
     setToken(null);
-    setUser({});
-  };
-
-  const validateToken = (token) => {
-    try {
-      let validUser = jwt_decode(token);
-      console.log(validUser);
-      setLoggedIn(true);
-      setToken(token);
-      setUser(validUser);
-    } catch (e) {
-      setLoggedIn(false);
-      setToken(null);
-      setUser({});
-      setError(e);
-      console.log('Token Validation Error', e);
-    }
+    setUser({ capabilities: [] });
+    cookie.remove('token', { path: '/' });
   };
 
   useEffect(() => {
-    const qs = new URLSearchParams(window.location.search);
-    const cookieToken = cookie.load('auth');
-    const token = qs.get('token') || cookieToken || null;
-    validateToken(token);
+    const token = cookie.load('token');
+    if (token) {
+      setToken(token);
+      setLoggedIn(true);
+      setUser(jwt_decode(token));
+    }
   }, []);
 
-  const values = {
-    loggedIn,
-    can,
-    login,
-    logout,
-    user,
-    error,
-    token,
-  };
-
   return (
-    <LoginContext.Provider value={values}>{children}</LoginContext.Provider>
+    <LoginContext.Provider
+      value={{
+        loggedIn,
+        login,
+        logout,
+        user,
+        can,
+        error,
+      }}
+    >
+      {children}
+    </LoginContext.Provider>
   );
 };
 
