@@ -5,7 +5,6 @@ import cookie from 'react-cookies';
 import jwt_decode from 'jwt-decode';
 import fetchApi from '../../utility/fetchApi';
 
-
 export const LoginContext = React.createContext();
 
 const LoginProvider = ({ children }) => {
@@ -13,7 +12,7 @@ const LoginProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState({ capabilities: [] });
   const [error, setError] = useState(null);
-
+  false && console.log(token);
   const can = (capability) => {
     console.log(user);
     return user?.acl?.capabilities?.includes(capability);
@@ -42,7 +41,6 @@ const LoginProvider = ({ children }) => {
       console.log(err);
       setError(err.message);
     }
-    
   };
 
   const logout = () => {
@@ -60,8 +58,6 @@ const LoginProvider = ({ children }) => {
       setUser(jwt_decode(token));
     }
   }, []);
-
-  
 
   return (
     <LoginContext.Provider

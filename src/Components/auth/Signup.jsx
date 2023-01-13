@@ -1,7 +1,7 @@
 /** @format */
 
 import { Button, TextInput } from '@mantine/core';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import fetchApi from '../../utility/fetchApi';
 
