@@ -24,6 +24,7 @@ export default function List({ list, setList }) {
       }
     }
     getTodos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
 
   async function updateItem(id, data) {

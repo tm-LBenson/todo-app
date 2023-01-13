@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useState } from 'react';
-import { Button, MantineProvider, TextInput } from '@mantine/core';
+import { Button, MantineProvider } from '@mantine/core';
 import ToDo from './Components/ToDo/ToDo';
 import Header from './Components/Header';
 import './Components/sass/main.scss';

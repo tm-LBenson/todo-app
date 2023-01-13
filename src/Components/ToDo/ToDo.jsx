@@ -5,8 +5,6 @@ import useForm from '../../hooks/form.js';
 import List from './List.jsx';
 
 import { Button } from '@mantine/core';
-
-import { v4 as uuid } from 'uuid';
 import { SettingsContext } from '../SettingsContext.jsx';
 import fetchApi from '../../utility/fetchApi.js';
 
