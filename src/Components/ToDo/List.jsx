@@ -24,7 +24,7 @@ export default function List({ list, setList, toggleComplete }) {
       }
     }
     getTodos();
-  }, []);
+  }, [list]);
 
   async function updateItem(id, data) {
     try {
@@ -33,7 +33,7 @@ export default function List({ list, setList, toggleComplete }) {
         data,
         'PUT',
       );
-      console.log(response);
+
       setList(response.results);
     } catch (error) {
       console.error(error);
@@ -70,7 +70,6 @@ export default function List({ list, setList, toggleComplete }) {
           data-testid={`todo-item-${idx}`}
           key={item._id}
         >
-          {console.log(item._id)}
           <Card
             shadow="sm"
             p="lg"

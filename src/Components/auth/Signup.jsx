@@ -6,10 +6,8 @@ import React, { useContext, useState } from 'react';
 import fetchApi from '../../utility/fetchApi';
 
 import { LoginContext } from './context';
-import Redirect from './Redirect';
 
 export default function SignUp() {
-  const [loggedIn, setLoggedIn] = useState(false);
   const signUp = async (body) => {
     try {
       await fetchApi(`https://api-js401.herokuapp.com/signup`, body, 'POST');
@@ -29,7 +27,6 @@ export default function SignUp() {
     await signUp(body);
     console.log(e.target.username.value, e.target.password.value);
     await login(e.target.username.value, e.target.password.value);
-    setLoggedIn(true);
   };
 
   return (
@@ -49,7 +46,6 @@ export default function SignUp() {
         />
         <Button type="submit">Submit</Button>
       </form>
-      
     </>
   );
 }
