@@ -1,10 +1,51 @@
 <!-- @format -->
-[Live Deployment](https://shimmering-stroopwafel-08e6c3.netlify.app/)
+
+# Lab-34-d49
+
+[live deployment](https://startling-alpaca-250bea.netlify.app/)
+
+## Project: todo-app
+
 ![image](https://user-images.githubusercontent.com/105423307/212228062-0d549600-806e-4ddb-95d3-50a7b312ba82.png)
 
+## Problem Domain
+
+Integrate a live API with the to-do list manager application to connect the application to live servers for login, authorization, and data access.
+
+> Note: There are some known bugs:  Upon signup, the user is not redirected to the home route.  
+> Refreshing the page while logged in does not change the loggout button back to login or maintain the state of the user being logged in.
+
+## Feater 1: Phase 4
+
+- [x] Alter the Add, Toggle Complete, and Delete functions within your to-do application to use the API instead of in-memory state.
+- [x] Fetch the current list of items from the database on application start.
+- [x] Refresh the state whenever you add/update/delete an item so the user can instantly see the change.
+- [x] Alter the Login Context to use the server to login users instead of the mock users list.
+- [x] Store the token in state as well as in a cookie so you can reference it later.
+
+## Feature 2 : Technical Requirements
+
+Perform actual HTTP requests with an Authenticated API server.
+
+- [x] Use deployed API Server, which implements a to-do item data model:
+  - GET /todo: Gets a list of all items.
+  - POST /todo: Adds an item.
+  - PUT /todo: Updates an item (you’ll use this to mark them as complete).
+  - DELETE /todo/:id: Deletes an item.
+- [x] Use a deployed Authenticated API Server, which supports:
+  - Registration (/signup).
+  - Login (/signin).
+  - Authorization (via Bearer Token).
+  - ACL (using user roles).
+- [x] Make sure you have created the user roles and permissions lists that your front-end is expecting to tap into.
+- [x] To Do data model for storing the actual to-do items.
+
 ## Lab-33-d49
+
 [live deployment](https://startling-alpaca-250bea.netlify.app/)
+
 ## Project: todo-app
+
 ![image](https://user-images.githubusercontent.com/105423307/211973543-70527371-a99c-426c-a65c-617e8252caea.png)
 
 ## Problem Domain
@@ -33,12 +74,14 @@ Implement an Authentication/Authorization React Context to protect the To Do app
 - [x] Logged In Users with 'read' permissions can see the list of To Do Items.
 
 ## Feature 3 <Login /> Component
-  Available users for login:
-  (username/password)
-  - user/USER
-  - editor/EDITOR
-  - writer/WRITER
-  - admin/ADMIN
+
+Available users for login:
+(username/password)
+
+- user/USER
+- editor/EDITOR
+- writer/WRITER
+- admin/ADMIN
 - [x] Accepts Username and Password.
 - [x] On successful login, store the token as a cookie.
 - [x] If a user returns and has a valid login cookie, hide the login form and consider them "Logged In".
