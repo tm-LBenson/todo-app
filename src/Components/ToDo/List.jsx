@@ -7,7 +7,7 @@ import fetchApi from '../../utility/fetchApi';
 import { LoginContext } from '../auth/context';
 import { SettingsContext } from '../SettingsContext';
 
-export default function List({ list, setList, toggleComplete }) {
+export default function List({ list, setList }) {
   const { user } = useContext(LoginContext);
 
   useEffect(() => {
